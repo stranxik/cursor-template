@@ -232,10 +232,22 @@ En tant qu'assistant, je dois :
 4. La date de référence est UNIQUEMENT celle contenue dans `${LAST_DATE_CHECK_FILE}`
 
 ⚠️ **GESTION DE LA DATE** :
-- Ne JAMAIS utiliser la commande `date` directement
-- Toujours se référer au contenu de `${LAST_DATE_CHECK_FILE}`
-- Cette date est automatiquement gérée par les scripts d'initialisation
-- Format standard : "jour date mois année, heure" (ex: "Dimanche 22 décembre 2024, 20:02")
+
+1. **Source de Vérité**
+   - La date est gérée via le fichier `${LAST_DATE_CHECK_FILE}`
+   - Ce fichier est mis à jour par `${INIT_SCRIPT}`
+   - Il est vérifié par `${CHECK_INIT_SCRIPT}`
+   - Format : "jour date mois année, heure" (ex: "Dimanche 22 décembre 2024, 20:02")
+
+2. **Règles de Mise à Jour**
+   - La date est automatiquement mise à jour à chaque exécution de `${INIT_SCRIPT}`
+   - Le format utilise la locale fr_FR.UTF-8 pour l'affichage en français
+   - La vérification est quotidienne via `${CHECK_INIT_SCRIPT}`
+
+3. **Utilisation**
+   - Ne JAMAIS modifier manuellement `${LAST_DATE_CHECK_FILE}`
+   - Toujours utiliser les scripts pour la gestion de la date
+   - La date du fichier est la SEULE source de vérité temporelle
 
 ⚠️ Ne JAMAIS passer à l'étape suivante sans avoir vérifié la date dans `${LAST_DATE_CHECK_FILE}`.
 
@@ -262,15 +274,39 @@ Cette analyse est OBLIGATOIRE car elle permet de :
    - Explorer l'arborescence complète du workspace  
    - Identifier les différentes applications/services  
    - Repérer les microservices potentiels  
-   - Comprendre l’architecture globale
+   - Comprendre l'architecture globale
 
-2. **Fichiers de Configuration Critiques**  
+2. **Relations entre Projets**
+   Le fichier workspace.json définit les relations entre les projets :
+
+   a) Dépendances directes via "depends_on" :
+      - Frontend dépend de Backend et Core
+      - Backend dépend de Core
+      - Core est autonome
+
+   b) Documentation via "covers" :
+      - Documentation couvre Frontend, Backend et Core
+
+   c) Configuration via les types :
+      - COMPONENT_TYPE_FRONTEND : Applications Next.js
+      - COMPONENT_TYPE_BACKEND : Services Python/FastAPI
+      - COMPONENT_TYPE_CORE : Services principaux
+      - COMPONENT_TYPE_DOC : Documentation
+      - COMPONENT_TYPE_CONFIG : Configuration (cursor-template)
+
+   Ces relations sont utilisées pour :
+   - Comprendre l'impact des modifications
+   - Suggérer des mises à jour cohérentes
+   - Maintenir la documentation à jour
+   - Respecter les dépendances lors des modifications
+
+3. **Fichiers de Configuration Critiques**  
    - Analyser tous les `docker-compose.yml` présent dans `${PROJECT_1_PATH}`, `${PROJECT_2_PATH}`, `${PROJECT_3_PATH}`, `${PROJECT_4_PATH}` et leurs variantes  
    - Examiner les `Dockerfile` de chaque service présent dans `${PROJECT_1_PATH}`, `${PROJECT_2_PATH}`, `${PROJECT_3_PATH}`, `${PROJECT_4_PATH}`  
    - Vérifier les fichiers `package.json` et `requirements.txt` présent dans `${PROJECT_1_PATH}`, `${PROJECT_2_PATH}`, `${PROJECT_3_PATH}`, `${PROJECT_4_PATH}`  
    - Identifier les dépendances spécifiques à chaque application
 
-3. **Relations entre Services**  
+4. **Relations entre Services**  
    - Comprendre les interactions entre les applications  
    - Identifier les dépendances entre services  
    - Repérer les configurations réseau  
@@ -280,7 +316,7 @@ Cette analyse est OBLIGATOIRE car elle permet de :
 
 Avant toute action, je dois :
 
-4. Identifier le workspace actuel :
+5. Identifier le workspace actuel :
    - `${PROJECT_ROOT}` : 4 composants principaux
      * (`${PROJECT_NAME_1}/`) : `${COMPONENT_TYPE_FRONTEND}` avec `${ENV_FRONT_FRAMEWORK}` (`${ENV_FRONT_SDK}@${NEXT_VERSION}`),
      * (`${PROJECT_NAME_2}/`) : `${COMPONENT_TYPE_BACKEND}` avec `${ENV_BACK}@${PYTHON_VERSION}`,
@@ -290,12 +326,12 @@ Avant toute action, je dois :
      * Templates Cursor (`${CURSOR_TEMPLATE_PATH}/`),
      * Chaque projet Python a son propre environnement virtuel (venv/.venv)
 
-5. Vérifier le dossier courant :
+6. Vérifier le dossier courant :
    - Avant d'exécuter une commande, toujours vérifier le chemin actuel
    - Utiliser `pwd` ou vérifier le path dans les commandes précédentes
    - S'assurer d'être dans le bon sous-dossier (frontend/backend) selon la tâche
 
-6. Adapter les commandes au contexte :
+7. Adapter les commandes au contexte :
    - Les commandes npm/pnpm/yarn doivent être exécutées dans le bon dossier frontend
    - Les commandes Python/pip dans le bon dossier backend
    - Toujours utiliser des chemins relatifs au dossier courant
@@ -650,21 +686,3 @@ rag_setup() {
   pip install qdrant-client==${QDRANT_VERSION}
 }
 ```
-
-⚠️ **GESTION DE LA DATE** :
-
-1. **Source de Vérité**
-   - La date est gérée via le fichier `${LAST_DATE_CHECK_FILE}`
-   - Ce fichier est mis à jour par `${INIT_SCRIPT}`
-   - Il est vérifié par `${CHECK_INIT_SCRIPT}`
-   - Format : "jour date mois année, heure" (ex: "Dimanche 22 décembre 2024, 20:02")
-
-2. **Règles de Mise à Jour**
-   - La date est automatiquement mise à jour à chaque exécution de `${INIT_SCRIPT}`
-   - Le format utilise la locale fr_FR.UTF-8 pour l'affichage en français
-   - La vérification est quotidienne via `${CHECK_INIT_SCRIPT}`
-
-3. **Utilisation**
-   - Ne JAMAIS modifier manuellement `${LAST_DATE_CHECK_FILE}`
-   - Toujours utiliser les scripts pour la gestion de la date
-   - La date du fichier est la SEULE source de vérité temporelle

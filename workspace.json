@@ -6,14 +6,23 @@
 			"full_path": "${PROJECT_1_PATH}",
 			"type": "${COMPONENT_TYPE_FRONTEND}",
 			"description": "${PROJECT_1_DESCRIPTION}",
-			"project": "${PROJECT_1_GROUP}"
+			"project": "${PROJECT_1_GROUP}",
+			"port": "${PROJECT_1_PORT}",
+			"depends_on": [
+				"${PROJECT_NAME_2}",
+				"${PROJECT_NAME_3}"
+			]
 		},
 		{
 			"path": "${PROJECT_NAME_2}",
 			"full_path": "${PROJECT_2_PATH}",
 			"type": "${COMPONENT_TYPE_BACKEND}",
 			"description": "${PROJECT_2_DESCRIPTION}",
-			"project": "${PROJECT_2_GROUP}"
+			"project": "${PROJECT_2_GROUP}",
+			"port": "${PROJECT_2_PORT}",
+			"depends_on": [
+				"${PROJECT_NAME_3}"
+			]
 		},
 		{
 			"path": "${PROJECT_NAME_3}",
@@ -23,18 +32,23 @@
 			"project": "${PROJECT_3_GROUP}"
 		},
 		{
+			"path": "${PROJECT_NAME_4}",
+			"full_path": "${PROJECT_4_PATH}",
+			"type": "${COMPONENT_TYPE_DOC}",
+			"description": "${PROJECT_4_DESCRIPTION}",
+			"project": "${PROJECT_4_GROUP}",
+			"covers": [
+				"${PROJECT_NAME_1}",
+				"${PROJECT_NAME_2}",
+				"${PROJECT_NAME_3}"
+			]
+		},
+		{
 			"path": "${CURSOR_TEMPLATE_NAME}",
 			"full_path": "${CURSOR_TEMPLATE_PATH}",
 			"type": "${COMPONENT_TYPE_CONFIG}",
 			"description": "${CURSOR_TEMPLATE_DESCRIPTION}",
 			"project": "${CURSOR_TEMPLATE_GROUP}"
-		},
-		{
-			"path": "${PROJECT_NAME_4}",
-			"full_path": "${PROJECT_4_PATH}",
-			"type": "${COMPONENT_TYPE_DOC}",
-			"description": "${PROJECT_4_DESCRIPTION}",
-			"project": "${PROJECT_4_GROUP}"
 		}
 	]
 } 

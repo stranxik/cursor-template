@@ -3,6 +3,7 @@
 ## 📋 Table des Matières
 1. [Pourquoi Cursor Template ?](#-pourquoi-cursor-template)
    - [État actuel de Cursor IDE](#état-actuel-de-cursor-ide)
+   - [Fonctionnalités Avancées de l'IA](#fonctionnalités-avancées-de-lia)
    - [Ce que Cursor Template apporte](#ce-que-cursor-template-apporte)
    - [Le défi](#le-défi)
    - [La solution](#la-solution)
@@ -52,6 +53,41 @@ Cursor propose nativement :
   * Fichier `.cursorrules` (ajout récent)
   * URLs de documentation dans les préférences
   * Paramètres basiques dans les settings
+
+#### Fonctionnalités Avancées de l'IA
+
+Cursor intègre nativement un système sophistiqué d'IA avec :
+
+1. **Apply Model**
+   - Modèle d'IA spécialisé pour appliquer les modifications de code
+   - Plus simple mais plus efficace que le modèle principal
+   - Optimisé pour les transformations de code précises
+
+2. **Outils Natifs de l'Assistant**
+   ```
+   🔍 Recherche et Analyse
+   ├── codebase_search : Recherche sémantique intelligente
+   ├── grep_search    : Recherche textuelle précise (regex)
+   └── file_search    : Recherche floue de fichiers
+
+   📁 Gestion Fichiers
+   ├── list_dir      : Exploration de répertoires
+   ├── read_file     : Lecture avec plages de lignes
+   └── delete_file   : Suppression sécurisée
+
+   ✏️ Édition de Code
+   ├── edit_file     : Modifications via apply model
+   ├── reapply       : Réessai avec modèle intelligent
+   └── parallel_apply : Modifications en parallèle
+
+   🖥️ Terminal
+   └── run_terminal_cmd : Exécution de commandes
+   ```
+
+3. **Cas d'Usage Spécifiques**
+   - `codebase_search` : Trouve du code sémantiquement similaire
+   - `grep_search` : Localise des chaînes exactes
+   - `parallel_apply` : Applique des modifications similaires en masse
 
 Mais il manque des fonctionnalités essentielles :
 - ❌ Pas de vraie compréhension de la structure multi-projets
@@ -492,32 +528,37 @@ sequenceDiagram
     S->>U: 6. Rapport final
 ```
 
-### 📁 Structure Générée
+###  Structure Générée
 
-Si le workspace est vide, création automatique :
+Si le workspace est vide, le script `init_conversation.sh --create` génère automatiquement une structure spécifique pour chaque type de projet :
 
+#### Frontend (${COMPONENT_TYPE_FRONTEND})
 ```
-${WORKSPACE_ROOT}/
-├── 📱 ${PROJECT_NAME_1}/     # Frontend Next.js
-│   ├── 📄 package.json      # Configuration npm
-│   ├── ⚙️ next.config.js    # Configuration Next.js
-│   └── 📂 src/             # Code source
-│       └── 📱 app/         # Pages de l'application
-│
-├── 🐍 ${PROJECT_NAME_2}/     # Backend Python
-│   ├── 📄 requirements.txt  # Dépendances Python
-│   ├── 📂 src/             # Code source
-│   └── 🧪 tests/           # Tests unitaires
-│
-├── ⚙️ ${PROJECT_NAME_3}/     # Core Service
-│   ├── 📄 requirements.txt  # Dépendances Python
-│   ├── 📂 src/             # Code source
-│   └── 🧪 tests/           # Tests unitaires
-│
-└── 📚 ${PROJECT_NAME_4}/     # Documentation
-    ├── 📖 docs/            # Documentation technique
-    └── 📄 README.md        # Guide principal
+${PROJECT_NAME_1}/
+├── package.json        # Configuration npm
+├── next.config.js      # Configuration Next.js
+├── src/
+│   └── app/           # Pages et composants
+└── public/            # Assets statiques
 ```
+
+#### Backend/Core (${COMPONENT_TYPE_BACKEND}, ${COMPONENT_TYPE_CORE})
+```
+${PROJECT_NAME_2}/     # ou ${PROJECT_NAME_3}/
+├── requirements.txt   # Dépendances Python
+├── README.md         # Documentation
+├── src/             # Code source
+└── tests/           # Tests unitaires
+```
+
+#### Documentation (${COMPONENT_TYPE_DOC})
+```
+${PROJECT_NAME_4}/
+├── README.md        # Documentation principale
+└── docs/           # Documentation détaillée
+```
+
+Cette structure de base fournit une organisation initiale pour chaque type de projet, que vous pouvez ensuite personnaliser selon vos besoins spécifiques.
 
 ### ✨ Vérifications Automatiques
 
@@ -1010,7 +1051,7 @@ Date : [La date exacte, parce que je suis pointilleux]
 
 === CE QUE J'AI FAIT ===
 1. Mon café du matin ☕️ (init_conversation.sh)
-2. Ma séance de yoga 🧘‍♂️ (check_workspace_path.sh)
+2. Ma séance de yoga 🧘‍��️ (check_workspace_path.sh)
 3. Mon tampon officiel 📋 (check_init.sh)
 
 === COMMENT JE ME SENS ===
