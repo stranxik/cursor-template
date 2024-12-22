@@ -18,6 +18,7 @@
    - [Structure Générée](#-structure-générée)
    - [Vérifications Automatiques](#-vérifications-automatiques)
    - [Résultat Final](#-résultat-final)
+   - [Solutions Alternatives](#-solutions-alternatives)
 4. [Configuration](#️-configuration)
    - [config.env](#configenv)
    - [EDEN_COMPLETE.md](#eden_completemd)
@@ -504,7 +505,7 @@ ${WORKSPACE_ROOT}/
 │       └── 📱 app/         # Pages de l'application
 │
 ├── 🐍 ${PROJECT_NAME_2}/     # Backend Python
-│   ├���─ 📄 requirements.txt  # Dépendances Python
+│   ├── 📄 requirements.txt  # Dépendances Python
 │   ├── 📂 src/             # Code source
 │   └── 🧪 tests/           # Tests unitaires
 │
@@ -566,6 +567,35 @@ Une fois l'installation terminée :
 - ✓ Assistant opérationnel
 
 L'assistant s'occupe de tout, il suffit d'avoir un `config.env` correctement configuré ! 🎉
+
+## 🔧 Solutions Alternatives
+
+Si l'initialisation automatique ne fonctionne pas comme prévu, voici les solutions alternatives :
+
+1. **Demander à l'assistant de lire .cursorrules**
+   ```
+   Pourrais-tu lire et exploiter le fichier .cursorrules ?
+   ```
+   L'assistant analysera le fichier et suivra les instructions d'initialisation.
+
+2. **Ajouter manuellement le contexte**
+   - Cliquer sur "Add Context" dans Cursor
+   - Sélectionner le fichier `.cursorrules`
+   - Demander à l'assistant : "Pourrais-tu lire et exploiter le fichier .cursorrules ?"
+
+3. **Lancer les scripts manuellement**
+   Les scripts sont disponibles dans le dossier `utils/` :
+   ```bash
+   # 1. Script d'initialisation principal
+   ./utils/init_conversation.sh
+   
+   # 2. Vérification de l'environnement
+   ./utils/check_workspace_path.sh
+   
+   # 3. Vérification de l'initialisation
+   ./utils/check_init.sh
+   ```
+   ⚠️ Important : Les scripts doivent être exécutés dans cet ordre pour garantir une initialisation correcte.
 
 ## ⚙️ Configuration
 
