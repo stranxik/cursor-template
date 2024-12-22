@@ -706,7 +706,7 @@ Configure le comportement de l'IA :
 
 ### Modifier la Structure du Workspace
 
-Pour ajouter ou enlever des projets, vous devez mettre à jour trois fichiers :
+Pour ajouter ou enlever des projets, vous devez mettre à jour quatre éléments :
 
 1. **Dans `config.env`** :
    ```env
@@ -741,9 +741,17 @@ Pour ajouter ou enlever des projets, vous devez mettre à jour trois fichiers :
    - Vérifier package.json/requirements.txt dans `${PROJECT_5_PATH}`
    ```
 
+4. **Dans les scripts `utils/`** :
+   ```bash
+   # Mettre à jour les vérifications dans
+   - init_conversation.sh    # Pour l'initialisation du nouveau projet
+   - check_workspace_path.sh # Pour la validation de la structure
+   - check_init.sh          # Pour les vérifications finales
+   ```
+
 ### Ajouter de Nouvelles Technologies
 
-Pour supporter de nouvelles technologies :
+Pour supporter de nouvelles technologies, quatre fichiers doivent être modifiés :
 
 1. **Dans `config.env`** :
    ```env
@@ -776,11 +784,20 @@ Pour supporter de nouvelles technologies :
    - Examiner go.mod pour les projets Go
    ```
 
+4. **Dans les scripts `utils/`** :
+   ```bash
+   # Adapter les scripts pour supporter la nouvelle technologie
+   - Ajouter les vérifications de version
+   - Inclure les dépendances spécifiques
+   - Mettre à jour les validations d'environnement
+   ```
+
 ⚠️ **Important** : 
 - Toujours utiliser des variables de `config.env`
-- Maintenir la cohérence entre les trois fichiers
+- Maintenir la cohérence entre tous les fichiers
 - Respecter la structure existante
 - Ne pas oublier d'ajouter les nouveaux types de composants
+- Tester les scripts après modification
 
 ## 🔄 Utilisation
 
