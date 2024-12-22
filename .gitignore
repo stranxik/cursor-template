@@ -1,0 +1,21 @@
+# ⚠️ IMPORTANT : Ce fichier n'est utilisé que pour contribuer au projet cursor-template
+# En utilisation normale, cursor-template ne doit PAS être un dépôt Git
+# Voir README.md pour plus de détails
+
+# Configuration sensible
+config.env
+
+# Fichiers d'analyse générés
+utils/workspace_analysis
+utils/workspace_analysis.previous
+utils/workspace_analysis.previous.old
+utils/last_date_check
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+
+# Fichiers temporaires
+*.tmp
+*.temp
+*.log

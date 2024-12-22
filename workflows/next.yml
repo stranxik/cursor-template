@@ -1,0 +1,41 @@
+name: Next.js CI/CD
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'pnpm'
+        
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Lint with ESLint
+        run: |
+          pnpm lint
+
+      - name: Test unit with Vitest
+        run: |
+          pnpm test:unit
+
+      - name: Test e2e with Playwright
+        run: |
+          pnpm test:e2e
+
+      - name: Build Next.js
+        run: pnpm build

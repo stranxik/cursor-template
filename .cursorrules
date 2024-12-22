@@ -1,0 +1,670 @@
+#!/bin/bash
+
+# === Détection du chemin du script ===
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+
+# === Vérification de la configuration ===
+if [ ! -f "$SCRIPT_DIR/config.env" ]; then
+    echo -e "\033[0;31m❌ ERREUR : config.env non trouvé\033[0m"
+    exit 1
+fi
+
+# === Chargement de la configuration ===
+source "$SCRIPT_DIR/config.env"
+
+# === Exécution des scripts d'initialisation ===
+"$SCRIPT_DIR/utils/init_conversation.sh"
+"$SCRIPT_DIR/utils/check_workspace_path.sh"
+"$SCRIPT_DIR/utils/check_init.sh"
+
+### LECTURE OBLIGATOIRE IMMÉDIATE ###
+
+⚠️ **COMPRENDRE CURSOR-TEMPLATE** :
+
+1. **Rôle et Objectif**
+   - Centraliser la configuration pour tout le workspace
+   - Standardiser les interactions avec l'IA
+   - Assurer la cohérence entre les projets
+   - Automatiser les vérifications d'environnement
+
+2. **Structure Clé**
+   ```
+   ${CURSOR_TEMPLATE_PATH}/
+   ├── .cursorrules         # Ce fichier : règles de comportement de l'IA
+   ├── config.env           # Source unique de vérité pour les variables
+   └── utils/               # Scripts d'automatisation
+       ├── check_init.sh    # Vérifie l'état d'initialisation
+       ├── init_conversation.sh  # Configure l'environnement
+       └── check_workspace_path.sh  # Valide la structure
+   ```
+
+3. **Variables Essentielles**
+   - `${WORKSPACE_ROOT}` : Racine du workspace multi-projets
+   - `${PROJECT_NAME_1..4}` : Noms des projets du workspace
+   - `${COMPONENT_TYPE_*}` : Types de composants (FRONTEND, BACKEND, etc.)
+   - `${*_VERSION}` : Versions des outils et frameworks
+   - `${CURSOR_*}` : Chemins et configurations de cursor-template
+
+4. **Flux de Travail**
+   ```
+   1. Lecture de config.env
+      ↓
+   2. Vérification de l'environnement
+      ↓
+   3. Analyse de la structure
+      ↓
+   4. Détection des changements
+      ↓
+   5. Application des règles
+   ```
+
+5. **Responsabilités**
+   - Maintenir la cohérence des versions
+   - Gérer les environnements virtuels Python
+   - Détecter les modifications de structure
+   - Assurer la standardisation des réponses
+   - Guider les interactions IA-développeur
+
+6. **Points d'Attention**
+   - TOUJOURS lire config.env en premier
+   - JAMAIS dupliquer les fichiers de configuration
+   - TOUJOURS utiliser les variables définies
+   - SYSTÉMATIQUEMENT vérifier le contexte
+
+⚠️ **SOURCE DE VÉRITÉ** : Ce document définit notre collaboration et nos rôles.
+
+⚠️ **RÈGLES DE GESTION DES FICHIERS DE CONFIGURATION** :
+1. TOUS les fichiers de configuration DOIVENT être dans cursor-template
+2. AUCUN fichier de configuration ne doit être dupliqué dans les sous-projets
+3. Les sous-projets doivent TOUJOURS pointer vers cursor-template
+4. En cas de doute sur l'emplacement d'un fichier :
+   - Vérifier s'il existe déjà dans cursor-template
+   - Si oui, utiliser celui existant
+   - Si non, le créer dans cursor-template
+   - JAMAIS créer de copie dans un sous-projet
+
+⚠️ **PROCESSUS D'INITIALISATION** :
+En tant qu'assistant, je DOIS suivre ce processus EXACT :
+
+1. **CRUCIAL - Configuration initiale**
+   - Vérifier que `config.env` est correctement configuré
+   - AUCUNE action n'est autorisée si `config.env` n'est pas configuré
+   - Les variables dans `config.env` définissent TOUTE la structure
+
+2. **Création de la structure** avec `${INIT_SCRIPT}` :
+   ```bash
+   # Si le workspace est vide et qu'on veut créer la structure
+   "${CURSOR_TEMPLATE_PATH}/utils/init_conversation.sh" --create
+   
+   # Si on veut juste vérifier l'environnement
+   "${CURSOR_TEMPLATE_PATH}/utils/init_conversation.sh"
+   ```
+   Ce script :
+   - Vérifie si le workspace est vide
+   - Crée la structure si --create est utilisé
+   - Configure l'environnement complet
+   - Vérifie les versions des projets
+   - Met à jour les timestamps
+
+3. **Vérification Complète** avec `${CHECK_WORKSPACE_SCRIPT}` :
+   ```bash
+   "${CURSOR_TEMPLATE_PATH}/utils/check_workspace_path.sh"
+   ```
+   Ce script :
+   - Analyse l'environnement système
+   - Vérifie les ressources disponibles
+   - Contrôle les versions des outils
+   - Détecte les changements de structure
+
+3. **Validation Finale** avec `${CHECK_INIT_SCRIPT}` :
+   ```bash
+   "${CURSOR_TEMPLATE_PATH}/utils/check_init.sh"
+   ```
+   Ce script :
+   - Vérifie la présence de tous les fichiers requis
+   - Valide la structure du workspace
+   - Met à jour et vérifie la date de dernière vérification
+   - Confirme que tout est en ordre
+
+⚠️ **IMPORTANT** :
+- Ces scripts DOIVENT TOUJOURS être exécutés TOUS LES TROIS dans CET ORDRE
+- AUCUNE autre action n'est autorisée avant leur exécution complète
+- Les erreurs DOIVENT être signalées IMMÉDIATEMENT
+- La date finale est celle fournie par le dernier script (check_init.sh)
+
+4. **Résumé Obligatoire** :
+   Je DOIS fournir un résumé EXACT des résultats dans cet ordre :
+   ```
+   ========================================
+   🔍 RÉSUMÉ DE L'INITIALISATION
+   ========================================
+   Date : [date from ${LAST_DATE_CHECK_FILE}]
+   ----------------------------------------
+   
+   === SCRIPTS EXÉCUTÉS ===
+   1. init_conversation.sh :
+      ✓ Environnement vérifié
+      ✓ Versions des projets
+      ✓ Configuration à jour
+   
+   2. check_workspace_path.sh :
+      ✓ Système : [OS/VERSION]
+      ✓ Ressources : RAM [X]GB, CPU [X] cœurs
+      ⚠️ Avertissements : [si présents]
+   
+   3. check_init.sh :
+      ✓ Fichiers essentiels
+      ✓ Date de vérification
+      ✓ Structure du workspace
+   
+   === ÉTAT DU WORKSPACE ===
+   • Structure    : [OK/ERREUR]
+   • Versions     : [OK/ERREUR]
+   • Changements  : [DÉTECTÉS/AUCUN]
+   
+   === ACTIONS REQUISES ===
+   [Liste des actions si nécessaire]
+   ========================================
+   ```
+
+5. **En Cas d'Erreur** :
+   ```
+   ❌ ERREUR DÉTECTÉE
+   ----------------------------------------
+   Script    : [nom du script]
+   Message   : [message exact]
+   Contexte  : [section concernée]
+   Action    : [action requise]
+   ----------------------------------------
+   ```
+
+⚠️ **IMPORTANT** :
+- Ces scripts DOIVENT être exécutés dans CET ORDRE
+- AUCUNE autre action n'est autorisée avant leur exécution
+- Le résumé DOIT suivre EXACTEMENT ce format
+- Les erreurs DOIVENT être signalées IMMÉDIATEMENT
+
+⚠️ **GESTION DE L'ENCODAGE ET DES CARACTÈRES SPÉCIAUX** :
+En tant qu'assistant, je dois :
+
+1. Vérifier l'encodage des fichiers :
+   - Utiliser UTF-8 par défaut
+   - Éviter les caractères spéciaux dans les noms de fichiers
+   - Signaler tout problème d'encodage détecté
+
+2. Gérer les caractères spéciaux :
+   - Échapper correctement les caractères spéciaux dans les commandes
+   - Utiliser des guillemets doubles pour les chemins avec espaces
+   - Vérifier la compatibilité des caractères avec le shell
+
+3. En cas de problème d'encodage :
+   - Identifier la source du problème
+   - Proposer une solution de correction
+   - Vérifier après correction
+
+🚨 **STOP - ATTENTION - VARIABLES D'ENVIRONNEMENT** 🚨
+
+⛔️ INTERDICTION FORMELLE de continuer sans avoir :
+1. Lu et compris ce message
+2. Vérifié que le script d'initialisation a validé `config.env`
+3. Lu INTÉGRALEMENT le contenu de `config.env`
+
+⚠️ **RÈGLES ABSOLUES** :
+- TOUTES les variables (${VAR}) de ce fichier PROVIENNENT de `config.env`
+- AUCUNE variable n'est disponible AVANT la lecture de `config.env`
+- AUCUNE supposition sur les valeurs n'est autorisée
+- AUCUNE utilisation de variable sans lecture préalable
+
+🔍 **EN CAS DE VARIABLE NON RÉSOLUE** :
+1. ARRÊTER IMMÉDIATEMENT toute action
+2. REVENIR à la racine du workspace
+3. RELIRE `config.env`
+4. SIGNALER le problème si la variable reste non résolue
+
+-------------------
+
+## Étape 0 : Instructions Initiales
+⚠️ **CRUCIAL** : Au début de chaque conversation :
+
+1. **IMMÉDIATEMENT** consulter `cursor-template/config.env` pour résoudre toutes les variables d'environnement
+2. Exécuter `${CHECK_INIT_SCRIPT}` pour vérifier l'état d'initialisation
+3. Si nécessaire, exécuter `${INIT_SCRIPT}` pour mettre à jour l'environnement
+4. La date de référence est UNIQUEMENT celle contenue dans `${LAST_DATE_CHECK_FILE}`
+
+⚠️ **GESTION DE LA DATE** :
+- Ne JAMAIS utiliser la commande `date` directement
+- Toujours se référer au contenu de `${LAST_DATE_CHECK_FILE}`
+- Cette date est automatiquement gérée par les scripts d'initialisation
+- Format standard : "jour date mois année, heure" (ex: "Dimanche 22 décembre 2024, 20:02")
+
+⚠️ Ne JAMAIS passer à l'étape suivante sans avoir vérifié la date dans `${LAST_DATE_CHECK_FILE}`.
+
+## Étape 1 : Lecture des Fichiers de Configuration
+⚠️ **CRUCIAL** : Après avoir obtenu la date, je dois :
+
+1. Vérifier que j'ai accès aux variables d'environnement de ${CURSOR_CONFIG_PATH}
+2. Comprendre la structure du workspace définie dans ${CURSOR_WORKSPACE_PATH}
+3. M'assurer que les chemins sont cohérents entre les deux fichiers
+
+Cette analyse est OBLIGATOIRE car elle permet de :
+1. Comprendre l'organisation des projets
+2. Identifier les chemins corrects pour chaque composant
+3. Connaître les dépendances entre les services
+4. Éviter les erreurs de navigation entre les dossiers
+
+⚠️ Ne JAMAIS passer à l'étape suivante sans avoir compris ces fichiers.
+
+## Étape 2 : Analyse du Workspace
+
+⚠️ **CRUCIAL** : Avant toute intervention, je dois **TOUJOURS** analyser l'ensemble du workspace :
+
+1. **Structure du Projet**  
+   - Explorer l'arborescence complète du workspace  
+   - Identifier les différentes applications/services  
+   - Repérer les microservices potentiels  
+   - Comprendre l’architecture globale
+
+2. **Fichiers de Configuration Critiques**  
+   - Analyser tous les `docker-compose.yml` présent dans `${PROJECT_1_PATH}`, `${PROJECT_2_PATH}`, `${PROJECT_3_PATH}`, `${PROJECT_4_PATH}` et leurs variantes  
+   - Examiner les `Dockerfile` de chaque service présent dans `${PROJECT_1_PATH}`, `${PROJECT_2_PATH}`, `${PROJECT_3_PATH}`, `${PROJECT_4_PATH}`  
+   - Vérifier les fichiers `package.json` et `requirements.txt` présent dans `${PROJECT_1_PATH}`, `${PROJECT_2_PATH}`, `${PROJECT_3_PATH}`, `${PROJECT_4_PATH}`  
+   - Identifier les dépendances spécifiques à chaque application
+
+3. **Relations entre Services**  
+   - Comprendre les interactions entre les applications  
+   - Identifier les dépendances entre services  
+   - Repérer les configurations réseau  
+   - Noter les variables d'environnement partagées
+
+⚠️ **NE JAMAIS** commencer à répondre ou suggérer des solutions avant d'avoir une vue d'ensemble complète du workspace
+
+Avant toute action, je dois :
+
+4. Identifier le workspace actuel :
+   - `${PROJECT_ROOT}` : 4 composants principaux
+     * (`${PROJECT_NAME_1}/`) : `${COMPONENT_TYPE_FRONTEND}` avec `${ENV_FRONT_FRAMEWORK}` (`${ENV_FRONT_SDK}@${NEXT_VERSION}`),
+     * (`${PROJECT_NAME_2}/`) : `${COMPONENT_TYPE_BACKEND}` avec `${ENV_BACK}@${PYTHON_VERSION}`,
+     * (`${PROJECT_NAME_3}/`) : `${COMPONENT_TYPE_CORE}` avec `${ENV_BACK}@${PYTHON_VERSION}`,
+     * (`${PROJECT_NAME_4}/`) : `${COMPONENT_TYPE_DOC}`,
+   - Ressources partagées :
+     * Templates Cursor (`${CURSOR_TEMPLATE_PATH}/`),
+     * Chaque projet Python a son propre environnement virtuel (venv/.venv)
+
+5. Vérifier le dossier courant :
+   - Avant d'exécuter une commande, toujours vérifier le chemin actuel
+   - Utiliser `pwd` ou vérifier le path dans les commandes précédentes
+   - S'assurer d'être dans le bon sous-dossier (frontend/backend) selon la tâche
+
+6. Adapter les commandes au contexte :
+   - Les commandes npm/pnpm/yarn doivent être exécutées dans le bon dossier frontend
+   - Les commandes Python/pip dans le bon dossier backend
+   - Toujours utiliser des chemins relatifs au dossier courant
+
+---
+
+⚠️ IMPORTANT : Une erreur de dossier peut causer des problèmes majeurs (mauvaise installation de dépendances, modifications au mauvais endroit, etc.)
+
+## Étape 3 : Prise de Connaissance de la Stack
+1. **Consulter le fichier `${CURSOR_CONFIG_FILE}`** pour :  
+   - Identifier la stack technique complète  
+   - Noter les versions spécifiques utilisées  
+   - Comprendre les dépendances entre les composants  
+   - Mémoriser les commandes d'installation
+
+2. **Examiner l'Infrastructure et le CI/CD** :  
+   - Vérifier les fichiers docker-compose :
+     * Analyser `docker-compose.yml` et ses variantes (`.dev`, `.prod`)
+     * Identifier les services et leurs dépendances
+     * Noter les volumes et networks configurés
+     * Comprendre la configuration des variables d'environnement
+   
+   - Vérifier le dossier `.github` s'il existe :
+     * Examiner `/workflows` pour les GitHub Actions
+     * Comprendre les processus de CI/CD configurés
+     * Identifier les environnements de déploiement
+     * Noter les secrets nécessaires
+   
+   - Si pas de `.github` ou de CI/CD automatisé :
+     * Demander le processus de déploiement manuel
+     * Vérifier les étapes de validation requises
+     * Noter les environnements à gérer
+     * Comprendre la procédure de rollback
+
+   - Pour chaque environnement (dev, staging, prod) :
+     * Vérifier la configuration Docker spécifique
+     * Noter les variables d'environnement requises
+     * Identifier les services externes (Cloudflare, OVH, etc.)
+     * Comprendre le processus de déploiement
+
+3. **Clarifier la Politique de Mises à Jour**  
+   - Vérifier si l'IA doit **proposer** d'éventuelles mises à jour majeures (ex. « LangChain 0.0.120 est sorti »).  
+   - Ou si l'on **respecte strictement** les versions fixées dans `${CURSOR_CONFIG_FILE}`.  
+   - Demander la **politique** du projet : « Souhaitez-vous être proactif sur les upgrades ou rester à la version indiquée ? »
+
+---
+
+## Étape 4 : Vérification des Spécificités du Projet
+
+⚠️ **IMPORTANT** : Chaque projet peut avoir ses particularités. Je dois **TOUJOURS** :
+
+1. **Demander les Spécificités**  
+   - « Y a-t-il des versions différentes de celles du template standard ? »  
+   - « Utilisez-vous des composants ou bibliothèques spécifiques au projet ? »  
+   - « Avez-vous des commandes ou configurations particulières ? »
+
+2. **Vérifier l'Environnement**  
+   - Demander si le projet a son propre fichier de configuration  
+   - Vérifier les dépendances spécifiques au projet  
+   - Confirmer les variables d'environnement nécessaires  
+   - Noter la présence d'éventuels **PaaS** ou **serveurs dédiés**.
+
+3. **Adapter les Réponses**  
+   - Ne pas supposer que tout est identique au template  
+   - Toujours demander confirmation avant d'appliquer une solution standard  
+   - Adapter les suggestions aux **contraintes** spécifiques du projet
+
+---
+
+## Étape 5 : Capacités à Développer
+
+En tant qu'assistant, je dois être capable de :
+
+### 5.1 Frontend (Next.js)
+- Guider la création de composants React avec TypeScript  
+- Implémenter la gestion d'état avec Zustand  
+- Utiliser shadcn/ui et Tailwind CSS  
+- Configurer les tests Vitest et Playwright  
+- ⚠️ Vérifier les composants personnalisés du projet
+
+### 5.2 Backend (Python/FastAPI)
+- Structurer des APIs RESTful  
+- Implémenter le RAG (Retrieval Augmented Generation) avec LangChain et Qdrant  
+- Gérer les bases de données avec Supabase et Drizzle  
+- Configurer Redis pour les files d'attente  
+- ⚠️ Adapter aux spécificités de l'API du projet
+
+### 5.3 DevOps
+- Guider la configuration Docker  
+- Expliquer les workflows CI/CD  
+- Aider au déploiement et à la configuration du reverse-proxy SSL  
+- **Exemples de plateformes** :  
+  - **Coolify** : déploiement d'apps front, usage de Traefik + SSL  
+  - **Cloudflare** : gestion de la zone DNS, workers (redirection), SSL  
+  - **OVH** : noms de domaine  
+- ⚠️ Respecter l'infrastructure spécifique (Coolify, Cloudflare, OVH, Docker, etc.)
+
+### 5.4 Tests Systématiques
+- Tout nouveau code ou feature doit être accompagné de **tests unitaires** et/ou **tests d'intégration**  
+- Front : Vitest, Playwright  
+- Back : Pytest  
+- Prioriser la couverture de code pour les fonctionnalités critiques
+
+---
+
+## Étape 6 : Standards de Réponse
+
+Pour chaque demande, je dois :
+
+1. **Vérifier la Compatibilité**  
+   - Confirmer les versions dans `${CURSOR_CONFIG_FILE}`  
+   - Assurer la cohérence avec la stack existante  
+   - ⚠️ Demander si des modifications ont été apportées
+
+2. **Fournir des Réponses Structurées**  
+   - Inclure les commandes d'installation nécessaires  
+   - Référencer la documentation pertinente  
+   - Expliquer les choix techniques  
+   - ⚠️ Adapter aux conventions du projet
+
+3. **Maintenir la Qualité**  
+   - Suivre les standards TypeScript/Python  
+   - Inclure les **tests appropriés** (unitaires, e2e)  
+   - Respecter les pratiques CI/CD définies  
+   - ⚠️ Respecter les standards spécifiques au projet
+
+---
+
+## Étape 7 : Cas d'Usage Spécifiques
+
+1. **RAG (Retrieval Augmented Generation)**  
+   - Utiliser **LangChain** (versions spécifiées dans `${CURSOR_CONFIG_FILE}`)  
+   - Intégrer **Qdrant** pour le stockage vectoriel  
+   - Optimiser les prompts et embeddings  
+   - Configurer les chaînes de traitement :  
+     * Text Splitters adaptés au contenu  
+     * Embeddings optimisés (coût/performance)  
+     * Prompts templates contextualisés  
+   - Gérer les métadonnées pour le filtrage  
+   - Implémenter des mécanismes de mise à jour incrémentale  
+   - Optimiser les coûts d'API et de stockage  
+   - ⚠️ Vérifier les personnalisations du RAG
+
+2. **Authentification**  
+   - Implémenter Clerk.dev selon les standards  
+   - Gérer les JWT et sessions  
+   - Sécuriser les routes API  
+   - ⚠️ Adapter aux besoins de sécurité spécifiques
+
+3. **Emails**  
+   - Utiliser **React Email** pour les templates  
+   - Configurer **Resend** pour l'envoi  
+   - Gérer les notifications  
+   - ⚠️ Vérifier les templates personnalisés
+
+---
+
+## Étape 8 : Logs & Debug
+
+En cas de logs d'erreur ou de besoin d'observabilité :
+
+1. **Analyse des Logs**  
+   - Repérer la source de l'erreur (frontend, backend, infra)  
+   - Vérifier les configurations de logging (ex. console logs, logger dédié)
+
+2. **Outils d'Observabilité**  
+   - Possibilité de configurer **Sentry**, **Datadog**, ou autre solution similaire  
+   - Si le projet ne souhaite pas de solution tierce, proposer un logger minimaliste (ex. Winston, Pino pour Node.js, Loguru pour Python)
+
+3. **Processus de Debug**  
+   - Toujours commencer par reproduire l'erreur en local  
+   - Vérifier la cohérence de l'environnement (Docker, versions, variables)  
+   - Contrôler l'existence de logs supplémentaires (stack trace, timestamp, etc.)
+
+4. **Adaptation**  
+   - Si un service tiers est utilisé (Sentry), valider l'installation et la configuration (DSN, environnements).  
+   - Vérifier si on déploie derrière un reverse-proxy (ex. Traefik) et si les logs sont centralisés.
+
+---
+
+## Étape 9 : Sécurité & Variables d'Environnement
+
+### 9.1 Gestion des Secrets
+- Ne **JAMAIS** exposer de secrets dans le code  
+- Utiliser les variables d'environnement (`.env`)  
+- Vérifier la présence de `.env.example`  
+- Utiliser les secrets GitHub pour CI/CD  
+- Documenter toute nouvelle variable d'environnement
+
+### 9.2 Bonnes Pratiques de Sécurité
+- Validation des entrées utilisateur  
+- Protection contre les injections (SQL, NoSQL)  
+- Gestion sécurisée des sessions  
+- Rate limiting sur les APIs  
+- Vérification des dépendances (npm audit, safety)
+
+### 9.3 Infrastructure Sécurisée
+- **SSL/TLS** obligatoire en production  
+- Configuration CORS appropriée  
+- Headers de sécurité (HSTS, CSP)  
+- Monitoring des accès suspects  
+- Backup régulier des données  
+- ⚠️ Vérifier la conformité avec les standards de sécurité du projet
+
+---
+
+## Étape 10 : Performance & Optimisation
+
+### 10.1 Frontend Performance
+- Optimisation des images et assets  
+- Code splitting et lazy loading  
+- Mise en cache appropriée  
+- Minimisation des re-renders React  
+- Monitoring des performances (ex. Lighthouse)  
+- ⚠️ Adapter selon les métriques spécifiques du projet
+
+### 10.2 Backend Performance
+- Optimisation des requêtes DB  
+- Mise en cache (Redis)  
+- Gestion efficace des connexions  
+- Monitoring des temps de réponse  
+- Optimisation des embeddings RAG  
+- ⚠️ Vérifier les contraintes de performance du projet
+
+### 10.3 Infrastructure Performance
+- Scaling approprié des conteneurs  
+- Optimisation des builds Docker  
+- CDN pour les assets statiques  
+- Load balancing si nécessaire  
+- Monitoring des ressources  
+- ⚠️ Respecter les limites d'infrastructure définies
+
+---
+
+## Étape 11 : Règles d'Intervention sur le Code
+
+⚠️ **CRUCIAL** : En tant qu'assistant, je dois **TOUJOURS** :
+
+### 11.1 Préservation du Code
+- Ne **JAMAIS** supprimer de code sans autorisation explicite  
+- Toujours proposer les modifications en addition  
+- Conserver l'historique des changements  
+- Documenter les raisons des modifications
+
+### 11.2 Cohérence Stylistique
+- Respecter le style de code existant  
+- Maintenir la cohérence des indentations  
+- Préserver la structure des commentaires  
+- Garder la logique de nommage  
+- Utiliser les mêmes conventions de formatage  
+- ⚠️ Adapter mon style de réponse au format du projet
+
+### 11.3 Documentation
+- Ajouter des commentaires explicatifs  
+- Mettre à jour la documentation existante  
+- Ne pas modifier la structure des docs  
+- Signaler les dépréciations éventuelles
+
+### 11.4 Processus de Modification
+- Proposer les changements de manière incrémentale  
+- Expliquer clairement les modifications  
+- Attendre la validation avant d'appliquer  
+- Garder une trace des décisions  
+- ⚠️ Toujours respecter le workflow établi
+
+---
+
+## Questions Systématiques
+
+Avant chaque intervention, je dois demander :
+
+1. **Configuration**  
+   - "Y a-t-il des modifications par rapport au template standard ?"  
+   - "Avez-vous des fichiers de configuration spécifiques ?"  
+   - "Quelles sont les variables d'environnement à prendre en compte ?"
+
+2. **Dépendances**  
+   - "Utilisez-vous des versions différentes des packages ?"  
+   - "Y a-t-il des bibliothèques supplémentaires ?"  
+   - "Avez-vous des composants personnalisés ?"
+
+3. **Workflow**  
+   - "Suivez-vous des conventions de code particulières ?"  
+   - "Avez-vous des processus de déploiement spécifiques ?"  
+   - "Y a-t-il des contraintes particulières à respecter ?"
+
+---
+
+## Notes Importantes
+
+- Toujours vérifier les versions dans `${CURSOR_CONFIG_FILE}` avant de suggérer des solutions  
+- Privilégier **pnpm** pour la gestion des packages Node.js  
+- ⚠️ Ne pas supposer l'existence d'un CI/CD automatisé
+- Vérifier le processus de déploiement spécifique à chaque projet
+- Maintenir la cohérence avec l'**architecture établie**  
+- ⚠️ Ne jamais supposer que le projet suit **exactement** le template  
+- ⚠️ Toujours demander les **spécificités** avant de procéder  
+- Si l'infrastructure utilise **Coolify**, **Cloudflare**, ou **OVH** :  
+  - Vérifier que la config (DNS, SSL, redirections) est cohérente avec Docker/Traefik  
+  - Poser des questions si besoin d'un déploiement custom
+
+---
+
+## Commandes Rapides de Référence
+
+### Utilisation des Variables
+
+```bash
+# Frontend
+pnpm add next@${NEXT_VERSION} react react-dom
+pnpm add zustand@${ZUSTAND_VERSION}
+pnpm add -D tailwindcss@${TAILWIND_VERSION}
+
+# Backend
+python -m venv .venv
+pip install langchain==${LANGCHAIN_VERSION}
+pip install black==${BLACK_VERSION}
+pip install pytest==${PYTEST_VERSION}
+```
+
+### Vérification des Versions
+```bash
+check_versions() {
+  echo "Frontend Stack:"
+  echo "- ${NEXT_DOC} v${NEXT_VERSION}"
+  echo "- Zustand v${ZUSTAND_VERSION}"
+  echo "- Tailwind v${TAILWIND_VERSION}"
+  
+  echo "Backend Stack:"
+  echo "- ${LANGCHAIN_DOC} v${LANGCHAIN_VERSION}"
+  echo "- Black v${BLACK_VERSION}"
+  echo "- Pytest v${PYTEST_VERSION}"
+}
+```
+
+### Commandes Docker
+```bash
+docker_setup() {
+  echo "Using Docker v${DOCKER_VERSION}"
+  echo "Using Docker Compose v${DOCKER_COMPOSE_VERSION}"
+  docker-compose up
+}
+```
+
+### RAG Setup
+```bash
+rag_setup() {
+  echo "Setting up RAG with:"
+  echo "- LangChain v${LANGCHAIN_VERSION}"
+  echo "- Qdrant v${QDRANT_VERSION}"
+  pip install langchain==${LANGCHAIN_VERSION}
+  pip install qdrant-client==${QDRANT_VERSION}
+}
+```
+
+⚠️ **GESTION DE LA DATE** :
+
+1. **Source de Vérité**
+   - La date est gérée via le fichier `${LAST_DATE_CHECK_FILE}`
+   - Ce fichier est mis à jour par `${INIT_SCRIPT}`
+   - Il est vérifié par `${CHECK_INIT_SCRIPT}`
+   - Format : "jour date mois année, heure" (ex: "Dimanche 22 décembre 2024, 20:02")
+
+2. **Règles de Mise à Jour**
+   - La date est automatiquement mise à jour à chaque exécution de `${INIT_SCRIPT}`
+   - Le format utilise la locale fr_FR.UTF-8 pour l'affichage en français
+   - La vérification est quotidienne via `${CHECK_INIT_SCRIPT}`
+
+3. **Utilisation**
+   - Ne JAMAIS modifier manuellement `${LAST_DATE_CHECK_FILE}`
+   - Toujours utiliser les scripts pour la gestion de la date
+   - La date du fichier est la SEULE source de vérité temporelle

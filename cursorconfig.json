@@ -1,0 +1,351 @@
+{
+  "stack": {
+    "front_end": {
+      "package_managers": {
+        "node": {
+          "name": "Node.js",
+          "version": "${NODE_VERSION}",
+          "url": "https://nodejs.org/docs",
+          "installation": {
+            "pnpm": "N/A",
+            "npx": "N/A"
+          }
+        },
+        "pnpm": {
+          "name": "pnpm",
+          "version": "${PNPM_VERSION}",
+          "url": "https://pnpm.io/motivation",
+          "installation": {
+            "npm": "npm install -g pnpm@${PNPM_VERSION}",
+            "npx": "N/A"
+          }
+        }
+      },
+      "framework": {
+        "name": "Next.js",
+        "version": "${NEXT_VERSION}",
+        "url": "https://nextjs.org/docs",
+        "sdk": {
+          "name": "next",
+          "version": "${NEXT_VERSION}",
+          "url": "https://www.npmjs.com/package/next"
+        },
+        "installation": {
+          "pnpm": "pnpm add next@${NEXT_VERSION} react react-dom",
+          "npx": "npx create-next-app@latest"
+        }
+      },
+      "gestion_etat": {
+        "name": "Zustand",
+        "version": "${ZUSTAND_VERSION}",
+        "url": "https://docs.pmnd.rs/zustand",
+        "sdk": {
+          "name": "zustand",
+          "version": "${ZUSTAND_VERSION}",
+          "url": "https://www.npmjs.com/package/zustand"
+        },
+        "installation": {
+          "pnpm": "pnpm add zustand@${ZUSTAND_VERSION}",
+          "npx": "N/A"
+        }
+      },
+      "authentification": {
+        "name": "Clerk.dev",
+        "version": "${CLERK_VERSION}",
+        "url": "https://clerk.com/docs",
+        "sdk": {
+          "name": "@clerk/clerk-js",
+          "version": "${CLERK_VERSION}",
+          "url": "https://www.npmjs.com/package/@clerk/clerk-js"
+        },
+        "installation": {
+          "pnpm": "pnpm add @clerk/clerk-js@${CLERK_VERSION}",
+          "npx": "N/A"
+        }
+      },
+      "emails": {
+        "react_email": {
+          "name": "React Email",
+          "version": "${REACT_EMAIL_VERSION}",
+          "url": "https://react.email/docs",
+          "sdk": {
+            "name": "react-email",
+            "version": "${REACT_EMAIL_VERSION}",
+            "url": "https://www.npmjs.com/package/react-email"
+          },
+          "installation": {
+            "pnpm": "pnpm add react-email@${REACT_EMAIL_VERSION}",
+            "npx": "N/A"
+          }
+        },
+        "resend": {
+          "name": "Resend",
+          "version": "${RESEND_VERSION}",
+          "url": "https://resend.com/docs",
+          "sdk": {
+            "name": "resend",
+            "version": "${RESEND_VERSION}",
+            "url": "https://www.npmjs.com/package/resend"
+          },
+          "installation": {
+            "pnpm": "pnpm add resend@${RESEND_VERSION}",
+            "npx": "N/A"
+          }
+        }
+      },
+      "ui": {
+        "framework": {
+          "name": "Tailwind CSS",
+          "version": "${TAILWIND_VERSION}",
+          "url": "https://tailwindcss.com/docs",
+          "installation": {
+            "pnpm": "pnpm add -D tailwindcss@${TAILWIND_VERSION} postcss autoprefixer",
+            "npx": "npx tailwindcss init"
+          }
+        },
+        "components": {
+          "name": "shadcn/ui",
+          "version": "${SHADCN_VERSION}",
+          "url": "https://ui.shadcn.com/docs",
+          "installation": {
+            "pnpm": "pnpm dlx shadcn@latest init",
+            "npx": "npx shadcn@latest init"
+          }
+        }
+      },
+      "testing": {
+        "unit": {
+          "name": "Vitest",
+          "version": "${VITEST_VERSION}",
+          "url": "https://vitest.dev/guide",
+          "installation": {
+            "pnpm": "pnpm add -D vitest@${VITEST_VERSION}",
+            "npx": "npx vitest"
+          }
+        },
+        "e2e": {
+          "name": "Playwright",
+          "version": "${PLAYWRIGHT_VERSION}",
+          "url": "https://playwright.dev/docs/intro",
+          "installation": {
+            "pnpm": "pnpm add -D @playwright/test@${PLAYWRIGHT_VERSION}",
+            "npx": "npx playwright install"
+          }
+        },
+        "quality": {
+          "name": "ESLint",
+          "version": "${ESLINT_VERSION}",
+          "url": "https://eslint.org/docs",
+          "installation": {
+            "pnpm": "pnpm add -D eslint@${ESLINT_VERSION}",
+            "npx": "npx eslint --init"
+          }
+        }
+      }
+    },
+    "back_end": {
+      "languages": {
+        "python": {
+          "name": "Python",
+          "version": "${PYTHON_VERSION}",
+          "url": "https://docs.python.org/3.12",
+          "installation": {
+            "pnpm": "N/A",
+            "npx": "N/A"
+          }
+        }
+      },
+      "api_docs": {
+        "name": "Swagger/OpenAPI",
+        "version": "3.1",
+        "url": "https://swagger.io/docs",
+        "installation": {
+          "pnpm": "pnpm add swagger-ui-express@4.5.0 swagger-jsdoc@6.2.8",
+          "npx": "N/A"
+        }
+      },
+      "base_vectorielle": {
+        "name": "Qdrant",
+        "version": "${QDRANT_VERSION}",
+        "url": "https://qdrant.tech/documentation",
+        "sdk": {
+          "name": "qdrant-js",
+          "version": "${QDRANT_JS_VERSION}",
+          "url": "https://www.npmjs.com/package/qdrant-js"
+        },
+        "installation": {
+          "pnpm": "pnpm add qdrant-js@${QDRANT_JS_VERSION}",
+          "npx": "N/A"
+        }
+      },
+      "base_de_donnees_classique": {
+        "name": "Supabase",
+        "version": "${SUPABASE_VERSION}",
+        "url": "https://supabase.com/docs",
+        "sdk": {
+          "name": "@supabase/supabase-js",
+          "version": "${SUPABASE_VERSION}",
+          "url": "https://www.npmjs.com/package/@supabase/supabase-js"
+        },
+        "installation": {
+          "pnpm": "pnpm add @supabase/supabase-js@${SUPABASE_VERSION}",
+          "npx": "N/A"
+        },
+        "orm": {
+          "name": "Drizzle ORM",
+          "version": "${DRIZZLE_VERSION}",
+          "url": "https://orm.drizzle.team/docs/overview",
+          "sdk": {
+            "name": "drizzle-orm",
+            "version": "${DRIZZLE_VERSION}",
+            "url": "https://www.npmjs.com/package/drizzle-orm"
+          },
+          "installation": {
+            "pnpm": "pnpm add drizzle-orm@${DRIZZLE_VERSION}",
+            "npx": "N/A"
+          }
+        }
+      },
+      "recherche_augmente": {
+        "name": "LangChain",
+        "version": "${LANGCHAIN_VERSION}",
+        "url": "https://js.langchain.com/docs",
+        "sdk": {
+          "name": "langchain",
+          "version": "${LANGCHAIN_VERSION}",
+          "url": "https://www.npmjs.com/package/langchain"
+        },
+        "installation": {
+          "pnpm": "pnpm add langchain@${LANGCHAIN_VERSION}",
+          "npx": "N/A"
+        },
+        "base_vectorielle": {
+          "name": "Qdrant",
+          "version": "${QDRANT_VERSION}",
+          "url": "https://qdrant.tech/documentation",
+          "sdk": {
+            "name": "qdrant-js",
+            "version": "${QDRANT_JS_VERSION}",
+            "url": "https://www.npmjs.com/package/qdrant-js"
+          },
+          "installation": {
+            "pnpm": "pnpm add qdrant-js@${QDRANT_JS_VERSION}",
+            "npx": "N/A"
+          }
+        }
+      },
+      "file_d_attente": {
+        "name": "Redis Streams",
+        "version": "${REDIS_VERSION}",
+        "url": "https://redis.io/docs/latest/",
+        "sdk": {
+          "name": "redis",
+          "version": "${REDIS_VERSION}",
+          "url": "https://www.npmjs.com/package/redis"
+        },
+        "installation": {
+          "pnpm": "pnpm add redis@${REDIS_VERSION}",
+          "npx": "N/A"
+        }
+      },
+      "sauvegardes": {
+        "vectorielles": {
+          "name": "Qdrant",
+          "version": "${QDRANT_VERSION}",
+          "url": "https://qdrant.tech/documentation",
+          "sdk": {
+            "name": "qdrant-js",
+            "version": "${QDRANT_JS_VERSION}",
+            "url": "https://www.npmjs.com/package/qdrant-js"
+          },
+          "installation": {
+            "pnpm": "pnpm add qdrant-js@${QDRANT_JS_VERSION}",
+            "npx": "N/A"
+          }
+        },
+        "relationnelles": {
+          "name": "Supabase",
+          "version": "${SUPABASE_VERSION}",
+          "url": "https://supabase.com/docs",
+          "sdk": {
+            "name": "@supabase/supabase-js",
+            "version": "${SUPABASE_VERSION}",
+            "url": "https://www.npmjs.com/package/@supabase/supabase-js"
+          },
+          "installation": {
+            "pnpm": "pnpm add @supabase/supabase-js@${SUPABASE_VERSION}",
+            "npx": "N/A"
+          }
+        }
+      },
+      "ci_cd": {
+        "github": {
+          "name": "GitHub",
+          "version": "N/A",
+          "url": "https://github.com",
+          "installation": {
+            "pnpm": "N/A",
+            "npx": "N/A"
+          }
+        },
+        "github_actions": {
+          "name": "GitHub Actions",
+          "version": "N/A",
+          "url": "https://docs.github.com/en/actions",
+          "installation": {
+            "pnpm": "N/A",
+            "npx": "N/A"
+          },
+          "templates": {
+            "next": "/workflows/next.yml",
+            "python": "/workflows/python.yml"
+          }
+        }
+      },
+      "containers": {
+        "docker": {
+          "name": "Docker",
+          "version": "${DOCKER_VERSION}",
+          "url": "https://docs.docker.com",
+          "installation": {
+            "pnpm": "N/A",
+            "npx": "N/A"
+          }
+        },
+        "docker_compose": {
+          "name": "Docker Compose",
+          "version": "${DOCKER_COMPOSE_VERSION}",
+          "url": "https://docs.docker.com/compose",
+          "installation": {
+            "pnpm": "N/A",
+            "npx": "N/A"
+          }
+        }
+      },
+      "testing": {
+        "unit": {
+          "name": "Pytest",
+          "version": "${PYTEST_VERSION}",
+          "url": "https://docs.pytest.org",
+          "installation": {
+            "pnpm": "N/A",
+            "npx": "N/A",
+            "pip": "pip install pytest==${PYTEST_VERSION}"
+          }
+        }
+      },
+      "formatter": {
+        "python": {
+          "name": "Black",
+          "version": "${BLACK_VERSION}",
+          "url": "https://black.readthedocs.io/en/stable/",
+          "installation": {
+            "pnpm": "N/A",
+            "npx": "N/A",
+            "pip": "pip install black==${BLACK_VERSION}"
+          }
+        }
+      }
+    }
+  }
+}
