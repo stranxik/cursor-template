@@ -5,6 +5,7 @@
    - [État actuel de Cursor IDE](#état-actuel-de-cursor-ide)
    - [Fonctionnalités Avancées de l'IA](#fonctionnalités-avancées-de-lia)
    - [Ce que Cursor Template apporte](#ce-que-cursor-template-apporte)
+   - [Évolution Continue avec Cursor](#évolution-continue-avec-cursor)
    - [Le défi](#le-défi)
    - [La solution](#la-solution)
    - [Les bénéfices](#les-bénéfices)
@@ -105,6 +106,20 @@ Mais il manque des fonctionnalités essentielles :
    - Vue workspace intégrée
    - Système de configuration centralisé
    - Compréhension des relations entre projets
+
+### Évolution Continue avec Cursor
+
+Notre template évolue en parallèle avec Cursor, en s'appuyant sur le [changelog officiel](https://www.cursor.com/changelog) pour :
+- Exploiter les nouvelles fonctionnalités natives dès leur sortie
+- Adapter nos outils pour rester complémentaires
+- Éviter les doublons de fonctionnalités
+- Maintenir une valeur ajoutée unique
+
+Par exemple, avec la version 0.44 de Cursor :
+- Nous utilisons leurs nouveaux tags (@docs, @git, @web, @folder)
+- Nous exploitons leur système d'édition en parallèle
+- Nous gardons notre couche d'abstraction pour la gestion de projets complexes
+- Nous maintenons nos fonctionnalités uniques de validation et standardisation
 
    ```mermaid
    graph TD
@@ -1051,7 +1066,7 @@ Date : [La date exacte, parce que je suis pointilleux]
 
 === CE QUE J'AI FAIT ===
 1. Mon café du matin ☕️ (init_conversation.sh)
-2. Ma séance de yoga 🧘‍��️ (check_workspace_path.sh)
+2. Ma séance de yoga 🧘‍️ (check_workspace_path.sh)
 3. Mon tampon officiel 📋 (check_init.sh)
 
 === COMMENT JE ME SENS ===
