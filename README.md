@@ -9,11 +9,15 @@
    - [Le défi](#le-défi)
    - [La solution](#la-solution)
    - [Les bénéfices](#les-bénéfices)
-2. [Technologies Actuellement Supportées](#-technologies-actuellement-supportées)
+2. [Générateur de Configuration](#-générateur-de-configuration)
+   - [cursor-template.fr](#cursor-templatefr)
+   - [Fonctionnalités du Générateur](#fonctionnalités-du-générateur)
+   - [Comment l'utiliser](#comment-lutiliser)
+3. [Technologies Actuellement Supportées](#-technologies-actuellement-supportées)
    - [Frontend (Next.js)](#frontend-nextjs)
    - [Backend (Python/FastAPI)](#backend-pythonfastapi)
    - [Infrastructure](#infrastructure)
-3. [Installation](#-installation)
+4. [Installation](#-installation)
    - [Processus Complet](#processus-complet)
    - [Configuration Initiale](#️-configuration-initiale)
    - [Processus d'Initialisation](#-processus-dinitialisation)
@@ -21,20 +25,20 @@
    - [Vérifications Automatiques](#-vérifications-automatiques)
    - [Résultat Final](#-résultat-final)
    - [Solutions Alternatives](#-solutions-alternatives)
-4. [Configuration](#️-configuration)
+5. [Configuration](#️-configuration)
    - [config.env](#configenv)
    - [EDEN_COMPLETE.md](#eden_completemd)
    - [.cursorrules](#cursorrules)
-5. [Personnalisation Avancée](#️-personnalisation-avancée)
+6. [Personnalisation Avancée](#️-personnalisation-avancée)
    - [Modifier la Structure du Workspace](#modifier-la-structure-du-workspace)
    - [Ajouter de Nouvelles Technologies](#ajouter-de-nouvelles-technologies)
-6. [Utilisation](#-utilisation)
+7. [Utilisation](#-utilisation)
    - [Premier lancement](#premier-lancement)
    - [Vérification de l'environnement](#vérification-de-lenvironnement)
-7. [Maintenance](#-maintenance)
+8. [Maintenance](#-maintenance)
    - [Vérification quotidienne](#vérification-quotidienne)
    - [Rotation des fichiers d'analyse](#rotation-des-fichiers-danalyse)
-8. [Bonjour ! Je prends la parole pour...](#-bonjour--je-prends-la-parole-pour-)
+9. [Bonjour ! Je prends la parole pour...](#-bonjour--je-prends-la-parole-pour-)
    - [Mon Petit Rituel d'Initialisation](#-mon-petit-rituel-dinitialisation)
    - [Mon Rapport de Situation](#-mon-rapport-de-situation)
    - [Mes Petites Manies](#️-mes-petites-manies)
@@ -398,6 +402,35 @@ Cursor Template est un framework de configuration et d'automatisation conçu pou
    - Contrôle des versions des outils
    - Validation des dépendances
    - Détection des incohérences
+
+## 🎯 Générateur de Configuration
+
+### cursor-template.fr
+
+Pour simplifier la mise en place de votre environnement Cursor Template, nous avons développé un générateur de configuration en ligne disponible sur [cursor-template.fr](https://cursor-template.fr).
+
+Ce site web vous permet de :
+- Générer votre fichier `config.env` personnalisé
+- Visualiser les derniers changements de Cursor et du Template
+- Accéder à la documentation complète
+- Configurer votre environnement en quelques clics
+
+### Fonctionnalités du Générateur
+
+- **Interface intuitive** : Remplissez un formulaire simple pour générer votre configuration
+- **Validation en temps réel** : Vérification immédiate de la cohérence des paramètres
+- **Prévisualisation** : Aperçu du fichier `config.env` avant téléchargement
+- **Mises à jour en direct** : Suivi des dernières versions de Cursor et du Template
+- **Documentation interactive** : Aide contextuelle pour chaque option
+
+### Comment l'utiliser
+
+1. Visitez [cursor-template.fr](https://cursor-template.fr)
+2. Remplissez le formulaire avec vos paramètres
+3. Prévisualisez la configuration générée
+4. Téléchargez votre fichier `config.env`
+5. Placez le fichier dans votre workspace
+6. Suivez le processus d'initialisation standard
 
 ## 🎯 Technologies Actuellement Supportées
 
