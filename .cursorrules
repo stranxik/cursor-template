@@ -13,9 +13,25 @@ fi
 source "$SCRIPT_DIR/config.env"
 
 # === Exécution des scripts d'initialisation ===
-"$SCRIPT_DIR/utils/init_conversation.sh"
+# Vérifie si le workspace est vide pour décider du mode d'exécution
+if [ -z "$(ls -A $WORKSPACE_ROOT)" ]; then
+    # Si le workspace est vide, on crée la structure
+    "$SCRIPT_DIR/utils/init_conversation.sh" --create
+else
+    # Si le workspace n'est pas vide, on vérifie juste l'environnement
+    "$SCRIPT_DIR/utils/init_conversation.sh"
+fi
+
 "$SCRIPT_DIR/utils/check_workspace_path.sh"
 "$SCRIPT_DIR/utils/check_init.sh"
+
+⚠️ **PROCESSUS D'INITIALISATION EXACT** :
+En tant qu'assistant, je DOIS suivre ces étapes dans l'ordre :
+1. Lire config.env
+2. Extraire CURSOR_TEMPLATE_PATH et autres variables essentielles
+3. Construire le chemin complet vers .cursorrules en utilisant ces variables
+4. Lire .cursorrules
+5. Exécuter les scripts d'initialisation dans l'ordre avec les chemins corrects
 
 ### LECTURE OBLIGATOIRE IMMÉDIATE ###
 
@@ -99,9 +115,14 @@ En tant qu'assistant, je DOIS suivre ce processus EXACT :
 
 3. **Initialisation** avec `${INIT_SCRIPT}` :
    ```bash
+   # Si le workspace est vide et qu'on veut créer la structure
+   "${CURSOR_TEMPLATE_PATH}/utils/init_conversation.sh" --create
+   
+   # Si on veut juste vérifier l'environnement
    "${CURSOR_TEMPLATE_PATH}/utils/init_conversation.sh"
    ```
    Ce script :
+   - Crée la structure si --create est utilisé (workspace vide)
    - Configure l'environnement complet
    - Vérifie les versions des projets
    - Met à jour les timestamps
