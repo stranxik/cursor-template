@@ -86,27 +86,27 @@ source "$SCRIPT_DIR/config.env"
 ⚠️ **PROCESSUS D'INITIALISATION** :
 En tant qu'assistant, je DOIS suivre ce processus EXACT :
 
-1. **CRUCIAL - Configuration initiale**
-   - Vérifier que `config.env` est correctement configuré
-   - AUCUNE action n'est autorisée si `config.env` n'est pas configuré
+1. **CRUCIAL - Lecture de config.env**
+   - IMMÉDIATEMENT lire `cursor-template/config.env`
+   - Extraire CURSOR_TEMPLATE_PATH et autres variables essentielles
+   - AUCUNE action n'est autorisée si `config.env` n'est pas lu
    - Les variables dans `config.env` définissent TOUTE la structure
 
-2. **Création de la structure** avec `${INIT_SCRIPT}` :
+2. **Lecture des règles** avec `${CURSOR_RULES_FILE}` :
+   - Construire le chemin complet vers .cursorrules en utilisant les variables de config.env
+   - Lire et comprendre les règles de comportement
+   - Valider la compréhension des directives
+
+3. **Initialisation** avec `${INIT_SCRIPT}` :
    ```bash
-   # Si le workspace est vide et qu'on veut créer la structure
-   "${CURSOR_TEMPLATE_PATH}/utils/init_conversation.sh" --create
-   
-   # Si on veut juste vérifier l'environnement
    "${CURSOR_TEMPLATE_PATH}/utils/init_conversation.sh"
    ```
    Ce script :
-   - Vérifie si le workspace est vide
-   - Crée la structure si --create est utilisé
    - Configure l'environnement complet
    - Vérifie les versions des projets
    - Met à jour les timestamps
 
-3. **Vérification Complète** avec `${CHECK_WORKSPACE_SCRIPT}` :
+4. **Vérification Complète** avec `${CHECK_WORKSPACE_SCRIPT}` :
    ```bash
    "${CURSOR_TEMPLATE_PATH}/utils/check_workspace_path.sh"
    ```
@@ -116,7 +116,7 @@ En tant qu'assistant, je DOIS suivre ce processus EXACT :
    - Contrôle les versions des outils
    - Détecte les changements de structure
 
-3. **Validation Finale** avec `${CHECK_INIT_SCRIPT}` :
+5. **Validation Finale** avec `${CHECK_INIT_SCRIPT}` :
    ```bash
    "${CURSOR_TEMPLATE_PATH}/utils/check_init.sh"
    ```
@@ -127,7 +127,7 @@ En tant qu'assistant, je DOIS suivre ce processus EXACT :
    - Confirme que tout est en ordre
 
 ⚠️ **IMPORTANT** :
-- Ces scripts DOIVENT TOUJOURS être exécutés TOUS LES TROIS dans CET ORDRE
+- Ces étapes DOIVENT TOUJOURS être exécutées dans CET ORDRE EXACT
 - AUCUNE autre action n'est autorisée avant leur exécution complète
 - Les erreurs DOIVENT être signalées IMMÉDIATEMENT
 - La date finale est celle fournie par le dernier script (check_init.sh)
